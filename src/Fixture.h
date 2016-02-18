@@ -9,14 +9,14 @@ namespace ofxColorKinetics {
 		Pixel(int dmx_address) {
 			mDmxAddress = dmx_address;
 			mRed = 0;
-			mBlue = 0;
 			mGreen = 0;
+			mBlue = 0;
 		};
 
 		int mDmxAddress;
 		unsigned char mRed;
-		unsigned char mBlue;
 		unsigned char mGreen;
+		unsigned char mBlue;
 	};
 
 	class Fixture {
@@ -39,16 +39,16 @@ namespace ofxColorKinetics {
 		void setColor(unsigned char red, unsigned char blue, unsigned char green) {
 			for (auto pixel : mPixels) {
 				pixel.mRed = red;
-				pixel.mBlue = blue;
 				pixel.mGreen = green;
+				pixel.mBlue = blue;
 			}
 		};
 		
 		void setColor(int pixel, unsigned char red, unsigned char blue, unsigned char green) {
 			if (pixel < mPixels.size()) {
 				mPixels[pixel].mRed = red;
-				mPixels[pixel].mBlue = blue;
 				mPixels[pixel].mGreen = green;
+				mPixels[pixel].mBlue = blue;
 			}
 			else {
 				std::printf("Fixture::setColor -- Pixel %d doesn't exist! This fixture only has %d pixels.", pixel, mPixels.size());

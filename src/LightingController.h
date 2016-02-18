@@ -6,9 +6,9 @@
 namespace ofxColorKinetics {
 	class LightingController {
 	public:
-		std::shared_ptr<LightingController> getInstance();
-		std::shared_ptr<LightingController> getInstance(std::string filename);
-		void addPowerSupply(std::string ip_address, int port);
+		static std::shared_ptr<LightingController> getInstance();
+		static std::shared_ptr<LightingController> getInstance(std::string filename);
+		void addPowerSupply(std::string ip_address, int port=6380);
 		void addFixture(std::string ip_address, int starting_address, int number_of_pixels);
 		void addFixture(std::string ip_address, int starting_address, int number_of_pixels, std::string name);
 		void addFixture(std::string ip_address, std::shared_ptr<Fixture> fixture);

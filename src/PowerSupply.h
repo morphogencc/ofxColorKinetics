@@ -5,11 +5,12 @@
 #include <map>
 #include "Fixture.h"
 #include "KinetPacket.h"
+#include "ofxUDPManager.h"
 
 namespace ofxColorKinetics {
 	class PowerSupply {
 	public:
-		static std::shared_ptr<PowerSupply> make(std::string ip_address, int port = 6380);
+		static std::shared_ptr<PowerSupply> make(std::string ip_address, int port);
 		~PowerSupply();
 		bool connect();
 		std::string getIpAddress();
@@ -27,5 +28,6 @@ namespace ofxColorKinetics {
 		int mPort;
 		std::vector<std::shared_ptr<Fixture> > mFixtures;
 		std::unique_ptr<KinetPacket> mKinet;
+		ofxUDPManager mUdpSocket;
 	};
 }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "LightingController.h"
+#include <memory>
 
 class ofApp : public ofBaseApp{
 
@@ -21,4 +23,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+protected:
+	std::shared_ptr<ofxColorKinetics::LightingController> mController;
+
 };

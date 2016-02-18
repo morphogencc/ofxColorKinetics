@@ -19,9 +19,10 @@ PowerSupply::~PowerSupply() {
 }
 
 bool PowerSupply::connect() {
-	//bool result = connect();
-	//return result;
-	return false;
+	mUdpSocket.Create();
+	bool success = mUdpSocket.Connect(mIpAddress, mPort);
+	mUdpSocket.SetNonBlocking(true);
+	return success;
 }
 
 std::string PowerSupply::getIpAddress() {
@@ -73,4 +74,5 @@ void PowerSupply::tick(unsigned char port) {
 
 	//send packet
 	mKinet->setPort(port);
+	mUdpSocket->Send(mKinet->getPacketData(), mKinet->getPacketLength());
 }
