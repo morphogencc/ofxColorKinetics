@@ -2,18 +2,18 @@
 
 using namespace ofxColorKinetics;
 
-static std::shared_ptr<LightingController> mLightingController = nullptr;
+std::shared_ptr<LightingController> LightingController::mLightingController = nullptr;
 
 std::shared_ptr<LightingController> LightingController::getInstance() {
 	if (!mLightingController) {
-		mLightingController = std::shared_ptr<LightingController>();
+		mLightingController = std::shared_ptr<LightingController>(new LightingController());
 	}
 	return mLightingController;
 }
 
 std::shared_ptr<LightingController> LightingController::getInstance(std::string filename) {
 	if (!mLightingController) {
-		mLightingController = std::shared_ptr<LightingController>(filename);
+		mLightingController = std::shared_ptr<LightingController>(new LightingController(filename));
 	}
 	return mLightingController;
 }

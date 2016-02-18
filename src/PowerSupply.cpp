@@ -10,7 +10,7 @@ std::shared_ptr<PowerSupply> PowerSupply::make(std::string ip_address, int port)
 PowerSupply::PowerSupply(std::string ip_address, int port) {
 	mIpAddress = ip_address;
 	mPort = port;
-	mKinet = std::unique_ptr<KinetPacket>(1);
+	mKinet = std::unique_ptr<KinetPacket>(new KinetPacket(0x0001));
 	connect();
 }
 

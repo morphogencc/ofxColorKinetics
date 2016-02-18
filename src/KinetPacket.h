@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 
 namespace ofxColorKinetics {
@@ -19,7 +21,7 @@ namespace ofxColorKinetics {
 		static const unsigned char mSequenceNumber[4];
 		static const unsigned char mPad;
 		static const unsigned char mFlags[2];
-		static unsigned char mStartCode[2];
+		char mStartCode[2];
 		unsigned char mVersionNumber[2];
 		unsigned char mUniverse[4];
 		unsigned char mPort;

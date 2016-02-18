@@ -1,5 +1,10 @@
+#pragma once
+
+#include <vector>
+#include <memory>
 
 namespace ofxColorKinetics {
+
 	struct Pixel {
 		Pixel(int dmx_address) {
 			mDmxAddress = dmx_address;
@@ -16,7 +21,7 @@ namespace ofxColorKinetics {
 
 	class Fixture {
 	public:
-		static std::shared_ptr<Fixture> make(int starting_address, int number_of_pixels) {
+		static std::shared_ptr<Fixture> Fixture::make(int starting_address, int number_of_pixels) {
 			std::shared_ptr<Fixture> fixture(new Fixture(starting_address, number_of_pixels));
 			return fixture;
 		}
@@ -25,7 +30,7 @@ namespace ofxColorKinetics {
 		
 		std::vector<Pixel> getPixels() {
 			return mPixels;
-		};
+		}
 
 		int getStartingAddress() {
 			return mDmxStart;

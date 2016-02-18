@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Fixture.h"
 #include "PowerSupply.h"
 
