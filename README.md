@@ -13,7 +13,7 @@ Once you've added power supplies, you can use `addFixture()` to add lighting fix
 There are several ways to add fixtures:
 
 * `addFixture("192.168.0.17", 0, 1)` would add a ColorBlast-type unit that uses DMX Addresses 0, 1, and 2 for red, green, and blue.
-* `addFixture("192.168.0.17", new ColorBlast(0))` would do the same thing (`ColorBlast(0)` creates a ColorBlast that starts at DMX Address 0).
+* `addFixture("192.168.0.17", std::shared_ptr<ColorBlast> blast(new ColorBlast(0)))` would do the same thing (`ColorBlast(0)` creates a ColorBlast that starts at DMX Address 0).
 
 Classes have been added for `ColorBlast`, 50 pixel `ColorFlex`, and 48- and 72-inch ColorBlaze (`ColorBlaze48`/`ColorBlaze72`) fixtures.
 
