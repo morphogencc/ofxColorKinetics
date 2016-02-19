@@ -35,6 +35,10 @@ namespace ofxColorKinetics {
 		int getStartingAddress() {
 			return mDmxStart;
 		};
+
+		int getNumberOfPixels() {
+			return mPixels.size();
+		}
 		
 		void setColor(unsigned char red, unsigned char green, unsigned char blue) {
 			for (auto pixel : mPixels) {

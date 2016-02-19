@@ -2,48 +2,17 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	// Create an instance of the LightingController class
-	mController = ofxColorKinetics::LightingController::getInstance();
 
-	// Add a power supply via the Controller -- all you need to know is the IP Address!
-	mController->addPowerSupply("192.168.10.20");
-
-	// Add enough fixtures to fill up all 512 DMX Channels in a KiNET Packet.
-	// All you need to know for each light is (1) which power supply it's attached to, (2) what its first DMX Address is, and (3) how many addressable components it has (one R,G,B triplet = 1)
-	for (int i = 0; i < 170; i++) {
-		mController->addFixture("192.168.10.20", i*3, 1);
-	}
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	//Every time you'd like to update the lights, get each light:
-	for (auto fixture : mController->getAllFixtures()) {
-		//set each light to a color
-		fixture->setColor(128, 0, 255);
-	}
-	
-	//And ask the controller to 'tick' -- which is send a message to every power supply with the updated DMX Universe
-	mController->tick();
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	ofBackground(0);
-	ofSetColor(255);
-	std::string power_supplies = " Power Supplies \n ============== \n ";
-	for (auto psu : mController->getAllPowerSupplies()) {
-		power_supplies += psu->getIpAddress();
-		power_supplies += " \n ";
-	}
-	ofDrawBitmapString(power_supplies, 50, 50);
 
-	std::string fixtures = " Fixtures       \n ============== \n ";
-	for (auto f : mController->getAllFixtures()) {
-		fixtures += std::to_string(f->getStartingAddress());
-		fixtures += " \n ";
-	}
-	ofDrawBitmapString(fixtures, 250, 50);
 }
 
 //--------------------------------------------------------------
