@@ -2,6 +2,7 @@
 
 using namespace ofxColorKinetics;
 
+// Don't forget -- Kinet uses little-endian byte ordering!
 const unsigned char KinetPacket::mMagicNumber[] = { 0x04, 0x01, 0xDC, 0x4A };
 const unsigned char KinetPacket::mSequenceNumber[] = { 0x00, 0x00, 0x00, 0x00 };
 const unsigned char KinetPacket::mPad = 0x00;
@@ -17,6 +18,7 @@ KinetPacket::KinetPacket(uint16_t version) {
 }
 
 void KinetPacket::setVersionNumber(uint16_t version) {
+	// Don't forget -- Kinet uses little-endian byte ordering!
 	mVersionNumber[1] = ((version >> 8) & 0xFF);
 	mVersionNumber[0] = (version & 0xFF);
 	if (mPacket.size() > 0) {
@@ -26,6 +28,7 @@ void KinetPacket::setVersionNumber(uint16_t version) {
 }
 
 void KinetPacket::setUniverse(uint32_t universe) {
+	// Don't forget -- Kinet uses little-endian byte ordering!
 	mUniverse[3] = ((universe >> 8) & 0xFF);
 	mUniverse[2] = ((universe >> 8) & 0xFF);
 	mUniverse[1] = ((universe >> 8) & 0xFF);
@@ -46,7 +49,8 @@ void KinetPacket::setPort(unsigned char port) {
 }
 
 void KinetPacket::setStartCode(uint16_t start_code) {
-	//should be 0x0000 or 0x0FFF for ChromASIC-based lights
+	// Don't forget -- Kinet uses little-endian byte ordering!
+	// should be 0x0000 or 0x0FFF for ChromASIC-based lights
 	mStartCode[1] = ((start_code >> 8) & 0xFF);
 	mStartCode[0] = (start_code & 0xFF);
 	if (mPacket.size() > 0) {
@@ -56,6 +60,8 @@ void KinetPacket::setStartCode(uint16_t start_code) {
 }
 
 void KinetPacket::resetPacket() {
+	// Don't forget -- Kinet uses little-endian byte ordering!
+
 	mPacket.clear();
 	mPacket.push_back(mMagicNumber[0]);
 	mPacket.push_back(mMagicNumber[1]);
@@ -77,15 +83,15 @@ void KinetPacket::resetPacket() {
 	mPacket.push_back(mPad);
 	mPacket.push_back(mFlags[0]);
 	mPacket.push_back(mFlags[1]);
-	mPacket.push_back(0x00); //length of packet -- 512 (0x0200)
-	mPacket.push_back(0x02); //length of packet -- 512 (0x0200)
+	mPacket.push_back(0x00);
+	mPacket.push_back(0x02);
 	mPacket.push_back(mStartCode[0]);
 	mPacket.push_back(mStartCode[1]);
 	
-	//set the starting in the packet.  Now, mPacket[mDmxStart] is DMX Address 0; mPacket[mDmxStart + 1] is DMX Address 1, etc.
+	// set the starting in the packet.  Now, mPacket[mDmxStart] is DMX Address 0; mPacket[mDmxStart + 1] is DMX Address 1, etc.
 	mDmxStart = mPacket.size();
 
-	//pad out the rest of the packet so we can just assign values to DMX Addresses as above.
+	// pad out the rest of the packet so we can just assign values to DMX Addresses as above.
 	for (int i = 0; i < 512; i++) {
 		mPacket.push_back(0x00);
 	}
