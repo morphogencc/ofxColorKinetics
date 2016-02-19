@@ -2,11 +2,11 @@
 
 using namespace ofxColorKinetics;
 
-const unsigned char KinetPacket::mMagicNumber[] = { '0x04', '0x01', '0xDC', '0x4A' };
-const unsigned char KinetPacket::mSequenceNumber[] = { '0x00', '0x00', '0x00', '0x00' };
-const unsigned char KinetPacket::mPad = '0x00';
-const unsigned char KinetPacket::mFlags[] = { '0x00', '0x00' };
-const unsigned char KinetPacket::mPacketType[] = { '0x01', '0x08' };
+const unsigned char KinetPacket::mMagicNumber[] = { 0x04, 0x01, 0xDC, 0x4A };
+const unsigned char KinetPacket::mSequenceNumber[] = { 0x00, 0x00, 0x00, 0x00 };
+const unsigned char KinetPacket::mPad = 0x00;
+const unsigned char KinetPacket::mFlags[] = { 0x00, 0x00 };
+const unsigned char KinetPacket::mPacketType[] = { 0x08, 0x01 };
 
 KinetPacket::KinetPacket(uint16_t version) {
 	setVersionNumber(version);
@@ -17,8 +17,8 @@ KinetPacket::KinetPacket(uint16_t version) {
 }
 
 void KinetPacket::setVersionNumber(uint16_t version) {
-	mVersionNumber[0] = ((version >> 8) & 0xFF);
-	mVersionNumber[1] = (version & 0xFF);
+	mVersionNumber[1] = ((version >> 8) & 0xFF);
+	mVersionNumber[0] = (version & 0xFF);
 	if (mPacket.size() > 0) {
 		mPacket[4] = mVersionNumber[0];
 		mPacket[5] = mVersionNumber[1];
@@ -26,10 +26,10 @@ void KinetPacket::setVersionNumber(uint16_t version) {
 }
 
 void KinetPacket::setUniverse(uint32_t universe) {
-	mUniverse[0] = ((universe >> 8) & 0xFF);
-	mUniverse[1] = ((universe >> 8) & 0xFF);
+	mUniverse[3] = ((universe >> 8) & 0xFF);
 	mUniverse[2] = ((universe >> 8) & 0xFF);
-	mUniverse[3] = (universe & 0xFF);
+	mUniverse[1] = ((universe >> 8) & 0xFF);
+	mUniverse[0] = (universe & 0xFF);
 	if (mPacket.size() > 0) {
 		mPacket[12] = mUniverse[0];
 		mPacket[13] = mUniverse[1];
@@ -47,8 +47,8 @@ void KinetPacket::setPort(unsigned char port) {
 
 void KinetPacket::setStartCode(uint16_t start_code) {
 	//should be 0x0000 or 0x0FFF for ChromASIC-based lights
-	mStartCode[0] = ((start_code >> 8) & 0xFF);
-	mStartCode[1] = (start_code & 0xFF);
+	mStartCode[1] = ((start_code >> 8) & 0xFF);
+	mStartCode[0] = (start_code & 0xFF);
 	if (mPacket.size() > 0) {
 		mPacket[22] = mStartCode[0];
 		mPacket[23] = mStartCode[1];
@@ -77,8 +77,8 @@ void KinetPacket::resetPacket() {
 	mPacket.push_back(mPad);
 	mPacket.push_back(mFlags[0]);
 	mPacket.push_back(mFlags[1]);
-	mPacket.push_back(0xAA); //length of packet -- 170 lights
-	mPacket.push_back(0x00); //length of packet -- 170 lights
+	mPacket.push_back(0x00); //length of packet -- 512 (0x0200)
+	mPacket.push_back(0x02); //length of packet -- 512 (0x0200)
 	mPacket.push_back(mStartCode[0]);
 	mPacket.push_back(mStartCode[1]);
 	
