@@ -11,7 +11,7 @@ void ofApp::setup(){
 	// Add enough fixtures to fill up all 512 DMX Channels in a KiNET Packet.
 	// All you need to know for each light is (1) which power supply it's attached to, (2) what its first DMX Address is, and (3) how many addressable components it has (one R,G,B triplet = 1)
 	for (int i = 0; i < 170; i++) {
-		mController->addFixture("192.168.10.20", 0, 1);
+		mController->addFixture("192.168.10.20", i*3, 1);
 	}
 }
 

@@ -66,9 +66,9 @@ void PowerSupply::clearFixtures() {
 void PowerSupply::tick(unsigned char port) {
 	for (auto fixture : mFixtures) {
 		for (auto pixel : fixture->getPixels()) {
-			mKinet->setDmxData(pixel.mDmxAddress, pixel.mRed);
-			mKinet->setDmxData(pixel.mDmxAddress + 1, pixel.mBlue);
-			mKinet->setDmxData(pixel.mDmxAddress + 2, pixel.mGreen);
+			mKinet->setDmxData(pixel->mDmxAddress, pixel->mRed);
+			mKinet->setDmxData(pixel->mDmxAddress + 1, pixel->mGreen);
+			mKinet->setDmxData(pixel->mDmxAddress + 2, pixel->mBlue);
 		}
 	}
 

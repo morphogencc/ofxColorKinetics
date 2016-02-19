@@ -28,7 +28,7 @@ namespace ofxColorKinetics {
 
 		~Fixture() {};
 		
-		std::vector<Pixel> getPixels() {
+		std::vector<std::shared_ptr<Pixel> > getPixels() {
 			return mPixels;
 		}
 
@@ -36,19 +36,19 @@ namespace ofxColorKinetics {
 			return mDmxStart;
 		};
 		
-		void setColor(unsigned char red, unsigned char blue, unsigned char green) {
+		void setColor(unsigned char red, unsigned char green, unsigned char blue) {
 			for (auto pixel : mPixels) {
-				pixel.mRed = red;
-				pixel.mGreen = green;
-				pixel.mBlue = blue;
+				pixel->mRed = red;
+				pixel->mGreen = green;
+				pixel->mBlue = blue;
 			}
 		};
 		
-		void setColor(int pixel, unsigned char red, unsigned char blue, unsigned char green) {
+		void setColor(int pixel, unsigned char red, unsigned char green, unsigned char blue) {
 			if (pixel < mPixels.size()) {
-				mPixels[pixel].mRed = red;
-				mPixels[pixel].mGreen = green;
-				mPixels[pixel].mBlue = blue;
+				mPixels[pixel]->mRed = red;
+				mPixels[pixel]->mGreen = green;
+				mPixels[pixel]->mBlue = blue;
 			}
 			else {
 				std::printf("Fixture::setColor -- Pixel %d doesn't exist! This fixture only has %d pixels.", pixel, mPixels.size());
@@ -59,10 +59,10 @@ namespace ofxColorKinetics {
 		Fixture(int starting_address, int number_of_pixels) {
 			mDmxStart = starting_address;
 			for (int i = 0; i < number_of_pixels; i++) {
-				mPixels.push_back(Pixel(mDmxStart + 3*i));
+				mPixels.push_back(std::shared_ptr<Pixel>(new Pixel(mDmxStart + 3*i)));
 			}
 		};
-		std::vector<Pixel> mPixels;
+		std::vector<std::shared_ptr<Pixel> > mPixels;
 		int mDmxStart;
 	};
 
