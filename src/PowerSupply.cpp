@@ -20,7 +20,7 @@ PowerSupply::~PowerSupply() {
 
 bool PowerSupply::connect() {
 	mUdpSocket.Create();
-	bool success = mUdpSocket.Connect(mIpAddress, mPort);
+	bool success = mUdpSocket.Connect(mIpAddress.c_str(), mPort);
 	mUdpSocket.SetNonBlocking(true);
 	return success;
 }
@@ -74,5 +74,5 @@ void PowerSupply::tick(unsigned char port) {
 
 	//send packet
 	mKinet->setPort(port);
-	mUdpSocket->Send(mKinet->getPacketData(), mKinet->getPacketLength());
+	mUdpSocket.Send(reinterpret_cast<const char*>(mKinet->getPacketData()), mKinet->getPacketLength());
 }
