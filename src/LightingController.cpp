@@ -80,6 +80,10 @@ std::vector<std::shared_ptr<Fixture> > LightingController::getAllFixtures() {
 	return fixtures;
 }
 
+int LightingController::getNumberOfFixtures() {
+	return mFixtures.size();
+}
+
 void LightingController::tick(unsigned char port) {
 	for (auto psu : mPowerSupplies) {
 		psu.second->tick(port);

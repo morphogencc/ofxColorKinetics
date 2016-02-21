@@ -72,7 +72,7 @@ namespace ofxColorKinetics {
 
 	class ColorBlast : public Fixture {
 	public:
-		std::shared_ptr<ColorBlast> make(int starting_address) {
+		static std::shared_ptr<ColorBlast> make(int starting_address) {
 			std::shared_ptr<ColorBlast> fixture(new ColorBlast(starting_address));
 			return fixture;
 		};
@@ -84,7 +84,7 @@ namespace ofxColorKinetics {
 
 	class FlexString : public Fixture {
 	public:
-		std::shared_ptr<FlexString> make(int starting_address) {
+		static std::shared_ptr<FlexString> make(int starting_address) {
 			std::shared_ptr<FlexString> fixture(new FlexString(starting_address));
 			return fixture;
 		};
@@ -96,7 +96,7 @@ namespace ofxColorKinetics {
 
 	class ColorBlaze48 : public Fixture {
 	public:
-		std::shared_ptr<ColorBlaze48> make(int starting_address) {
+		static std::shared_ptr<ColorBlaze48> make(int starting_address) {
 			std::shared_ptr<ColorBlaze48> fixture(new ColorBlaze48(starting_address));
 			return fixture;
 		};
@@ -108,7 +108,7 @@ namespace ofxColorKinetics {
 
 	class ColorBlaze72 : public Fixture {
 	public:
-		std::shared_ptr<ColorBlaze72> make(int starting_address) {
+		static std::shared_ptr<ColorBlaze72> make(int starting_address) {
 			std::shared_ptr<ColorBlaze72> fixture(new ColorBlaze72(starting_address));
 			return fixture;
 		};
