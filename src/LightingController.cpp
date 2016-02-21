@@ -85,3 +85,9 @@ void LightingController::tick(unsigned char port) {
 		psu.second->tick(port);
 	}
 }
+
+void LightingController::setKinetVersion(int version) {
+	for (auto psu : mPowerSupplies) {
+		psu.second->setKinetVersion(version);
+	}
+}

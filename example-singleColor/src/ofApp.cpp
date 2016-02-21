@@ -7,6 +7,7 @@ void ofApp::setup(){
 
 	// Add a power supply via the Controller -- all you need to know is the IP Address!
 	mController->addPowerSupply("192.168.10.12");
+	mController->setKinetVersion(1);
 
 	// Add enough fixtures to fill up all 512 DMX Channels in a KiNET Packet.
 	// All you need to know for each light is (1) which power supply it's attached to, (2) what its first DMX Address is, and (3) how many addressable components it has (one R,G,B triplet = 1)
@@ -20,11 +21,11 @@ void ofApp::update(){
 	//Every time you'd like to update the lights, get each light:
 	for (auto fixture : mController->getAllFixtures()) {
 		//set each light to a color
-		fixture->setColor(0xFF, 0xFF, 0x00);
+		fixture->setColor(0xFF, 0x00, 0xFF);
 	}
 	
 	//And ask the controller to 'tick' -- which is send a message to every power supply with the updated DMX Universe
-	mController->tick(0x01);
+	mController->tick(0x00);
 }
 
 //--------------------------------------------------------------

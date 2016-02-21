@@ -20,12 +20,14 @@ KinetPacket::KinetPacket(uint16_t version) {
 void KinetPacket::setVersionNumber(uint16_t version) {
 	// Don't forget -- Kinet uses little-endian byte ordering!
 	if (version == 0x01) {
-		mPacketType[0] = 0x08;
+		mPacketType[0] = 0x01; // 0x08
 		mPacketType[1] = 0x01;
+		mPortIndex = 12;
 	}
 	else if (version == 0x02) {
 		mPacketType[0] = 0x01;
 		mPacketType[1] = 0x01;
+		mPortIndex = 16;
 	}
 	else {
 		std::printf("KiNETPacket::setVersionNumber -- unsupported version number %d!  This library only supports KiNET v1 and KiNET v2.\n", version);
@@ -36,6 +38,7 @@ void KinetPacket::setVersionNumber(uint16_t version) {
 	mVersionNumber[0] = 0x01;
 
 	resetPacket();
+	std::printf("KiNETPacket::setVersionNumber -- Set KiNET Version to v%d.\n", version);
 }
 
 void KinetPacket::setUniverse(uint32_t universe) {
@@ -49,7 +52,9 @@ void KinetPacket::setUniverse(uint32_t universe) {
 
 void KinetPacket::setPort(unsigned char port) {
 	mPort = port;
-	resetPacket();
+	if (mPacket.size() > 0) {
+		mPacket[mPortIndex] = mPort;
+	}
 }
 
 void KinetPacket::setStartCode(uint16_t start_code) {
@@ -86,6 +91,7 @@ void KinetPacket::resetPacket() {
 		mPacket.push_back(mUniverse[1]);
 		mPacket.push_back(mUniverse[2]);
 		mPacket.push_back(mUniverse[3]);
+		mPacket.push_back(mPad);
 	}
 	else if (mVersion == 2) {
 		mPacket.push_back(mUniverse[0]);

@@ -27,7 +27,7 @@ bool PowerSupply::connect() {
 	else {
 		std::printf("PowerSupply::connect -- Failed to connect to power supply at %s:%d!\n", mIpAddress.c_str(), mPort);
 	}
-	mUdpSocket.SetNonBlocking(true);
+	//mUdpSocket.SetNonBlocking(true);
 	return success;
 }
 

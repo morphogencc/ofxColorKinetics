@@ -24,6 +24,7 @@ namespace ofxColorKinetics {
 		unsigned char mStartCode[2];
 		unsigned char mVersionNumber[2];
 		int mVersion;
+		int mPortIndex;
 		unsigned char mUniverse[4];
 		unsigned char mPort;
 		unsigned char mLength[2];

@@ -19,6 +19,7 @@ namespace ofxColorKinetics {
 		std::vector<std::shared_ptr<Fixture> > getFixtures(std::string ip_address);
 		std::vector<std::shared_ptr<Fixture> > getAllFixtures();
 		void tick(unsigned char port = 0x00);
+		void setKinetVersion(int version);
 	protected:
 		LightingController();
 		LightingController(std::string filename);
