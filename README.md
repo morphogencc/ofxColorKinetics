@@ -3,6 +3,8 @@
 ## Requirements
 This library requires `ofxNetwork` for networking.
 
+Also, make sure that your computer is configured to be on the same subnet as your power supply!
+
 ## Usage
 `LightingController` is the entry point for this addon -- create an instance of `std::shared_ptr<LightingController>` to get going.
 
@@ -13,12 +15,14 @@ Once you've added power supplies, you can use `addFixture()` to add lighting fix
 There are several ways to add fixtures:
 
 * `addFixture("192.168.0.17", 0, 1)` would add a ColorBlast-type unit that uses DMX Addresses 0, 1, and 2 for red, green, and blue.
-* `addFixture("192.168.0.17", std::shared_ptr<ColorBlast> blast(new ColorBlast(0)))` would do the same thing (`ColorBlast(0)` creates a ColorBlast that starts at DMX Address 0).
+* `addFixture("192.168.0.17", ColorBlast::make(0))` would do the same thing, but uses a shorthand.
 
 Classes have been added for `ColorBlast`, 50 pixel `ColorFlex`, and 48- and 72-inch ColorBlaze (`ColorBlaze48`/`ColorBlaze72`) fixtures.
 
 ## Examples
+* `example-singleColor` creates a single power supply and sends a fading color to all 512 DMX channels.  This is a good first test to see if your network is configured properly.
 
 ## Contributions
 
 ## More Information
+For more information on how to address your lights and power supply, see the official Philips documentation for their QuickPlay Pro software: (KiNET Addressing)[http://www.colorkinetics.com/support/addressing/]
