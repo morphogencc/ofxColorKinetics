@@ -10,7 +10,7 @@ std::shared_ptr<PowerSupply> PowerSupply::make(std::string ip_address, int port)
 PowerSupply::PowerSupply(std::string ip_address, int port) {
 	mIpAddress = ip_address;
 	mPort = port;
-	mKinet = std::unique_ptr<KinetPacket>(new KinetPacket(0x0001));
+	mKinet = std::unique_ptr<KinetPacket>(new KinetPacket(1));
 	connect();
 }
 
@@ -21,6 +21,12 @@ PowerSupply::~PowerSupply() {
 bool PowerSupply::connect() {
 	mUdpSocket.Create();
 	bool success = mUdpSocket.Connect(mIpAddress.c_str(), mPort);
+	if (success) {
+		std::printf("PowerSupply::connect -- Successfully connected to power supply at %s:%d.\n", mIpAddress.c_str(), mPort);
+	}
+	else {
+		std::printf("PowerSupply::connect -- Failed to connect to power supply at %s:%d!\n", mIpAddress.c_str(), mPort);
+	}
 	mUdpSocket.SetNonBlocking(true);
 	return success;
 }
@@ -55,7 +61,7 @@ std::shared_ptr<Fixture> PowerSupply::getFixture(int starting_address) {
 			return fixture;
 		}
 	}
-	std::printf("PowerSupply::getFixture() -- could not find a fixture with designated starting DMX address.");
+	std::printf("PowerSupply::getFixture() -- could not find a fixture with designated starting DMX address.\n");
 	return nullptr;
 }
 

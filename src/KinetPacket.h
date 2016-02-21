@@ -17,12 +17,13 @@ namespace ofxColorKinetics {
 		int getPacketLength();
 	protected:
 		static const unsigned char mMagicNumber[4];
-		static const unsigned char mPacketType[2];
 		static const unsigned char mSequenceNumber[4];
 		static const unsigned char mPad;
 		static const unsigned char mFlags[2];
-		char mStartCode[2];
+		unsigned char mPacketType[2];
+		unsigned char mStartCode[2];
 		unsigned char mVersionNumber[2];
+		int mVersion;
 		unsigned char mUniverse[4];
 		unsigned char mPort;
 		unsigned char mLength[2];

@@ -8,7 +8,7 @@ namespace ofxColorKinetics {
 	public:
 		static std::shared_ptr<LightingController> getInstance();
 		static std::shared_ptr<LightingController> getInstance(std::string filename);
-		void addPowerSupply(std::string ip_address, int port=6380);
+		void addPowerSupply(std::string ip_address, int port=6038);
 		void addFixture(std::string ip_address, int starting_address, int number_of_pixels);
 		void addFixture(std::string ip_address, int starting_address, int number_of_pixels, std::string name);
 		void addFixture(std::string ip_address, std::shared_ptr<Fixture> fixture);
@@ -18,7 +18,7 @@ namespace ofxColorKinetics {
 		std::shared_ptr<Fixture> getFixture(std::string ip_address, int starting_address);
 		std::vector<std::shared_ptr<Fixture> > getFixtures(std::string ip_address);
 		std::vector<std::shared_ptr<Fixture> > getAllFixtures();
-		void tick();
+		void tick(unsigned char port = 0x00);
 	protected:
 		LightingController();
 		LightingController(std::string filename);

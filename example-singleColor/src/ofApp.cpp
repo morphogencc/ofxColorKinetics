@@ -6,12 +6,12 @@ void ofApp::setup(){
 	mController = ofxColorKinetics::LightingController::getInstance();
 
 	// Add a power supply via the Controller -- all you need to know is the IP Address!
-	mController->addPowerSupply("192.168.10.20");
+	mController->addPowerSupply("192.168.10.12");
 
 	// Add enough fixtures to fill up all 512 DMX Channels in a KiNET Packet.
 	// All you need to know for each light is (1) which power supply it's attached to, (2) what its first DMX Address is, and (3) how many addressable components it has (one R,G,B triplet = 1)
 	for (int i = 0; i < 170; i++) {
-		mController->addFixture("192.168.10.20", i*3, 1);
+		mController->addFixture("192.168.10.12", 3*i + 1, 1);
 	}
 }
 
@@ -20,11 +20,11 @@ void ofApp::update(){
 	//Every time you'd like to update the lights, get each light:
 	for (auto fixture : mController->getAllFixtures()) {
 		//set each light to a color
-		fixture->setColor(128, 0, 255);
+		fixture->setColor(0xFF, 0xFF, 0x00);
 	}
 	
 	//And ask the controller to 'tick' -- which is send a message to every power supply with the updated DMX Universe
-	mController->tick();
+	mController->tick(0x01);
 }
 
 //--------------------------------------------------------------
