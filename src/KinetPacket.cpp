@@ -12,7 +12,7 @@ KinetPacket::KinetPacket(uint16_t version) {
 	setVersionNumber(version);
 	setUniverse(0xFFFFFFFF);
 	setPort(0x00);
-	setStartCode(0x0FFF);
+	setStartCode(0x0000);
 	resetPacket();
 	std::printf("KiNETPacket::KiNETPacket -- Successfully initialized a KiNET v%d packet.\n", version);
 }
@@ -20,12 +20,12 @@ KinetPacket::KinetPacket(uint16_t version) {
 void KinetPacket::setVersionNumber(uint16_t version) {
 	// Don't forget -- Kinet uses little-endian byte ordering!
 	if (version == 0x01) {
-		mPacketType[0] = 0x01; // 0x08
+		mPacketType[0] = 0x01;
 		mPacketType[1] = 0x01;
 		mPortIndex = 12;
 	}
 	else if (version == 0x02) {
-		mPacketType[0] = 0x01;
+		mPacketType[0] = 0x08;
 		mPacketType[1] = 0x01;
 		mPortIndex = 16;
 	}
@@ -99,7 +99,7 @@ void KinetPacket::resetPacket() {
 		mPacket.push_back(mUniverse[2]);
 		mPacket.push_back(mUniverse[3]);
 		mPacket.push_back(mPort);
-		mPacket.push_back(mPad);
+		mPacket.push_back(0x63);
 		mPacket.push_back(mFlags[0]);
 		mPacket.push_back(mFlags[1]);
 		mPacket.push_back(0x00);

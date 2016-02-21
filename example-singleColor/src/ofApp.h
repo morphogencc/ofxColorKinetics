@@ -25,5 +25,7 @@ class ofApp : public ofBaseApp{
 		
 protected:
 	std::shared_ptr<ofxColorKinetics::LightingController> mController;
+	int mValue;
+	int mIncrement;
 
 };
