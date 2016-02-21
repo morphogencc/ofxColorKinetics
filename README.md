@@ -25,4 +25,4 @@ Classes have been added for `ColorBlast`, 50 pixel `ColorFlex`, and 48- and 72-i
 ## Contributions
 
 ## More Information
-For more information on how to address your lights and power supply, see the official Philips documentation for their QuickPlay Pro software: (KiNET Addressing)[http://www.colorkinetics.com/support/addressing/]
+For more information on how to address your lights and power supply, see the official Philips documentation for their QuickPlay Pro software: [KiNET Addressing](http://www.colorkinetics.com/support/addressing/)
