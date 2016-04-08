@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	ofSetWindowTitle("ofxColorKinetics -- Single Color Example");
+	ofSetWindowTitle("ofxColorKinetics -- Single Color Example";)
 
 	// Create an instance of the LightingController class
 	mController = ofxColorKinetics::LightingController::getInstance();
